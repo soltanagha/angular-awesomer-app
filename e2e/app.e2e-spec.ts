@@ -7,8 +7,8 @@ describe('angular-rest-app App', function() {
     page = new AngularRestAppPage();
   });
 
-  it('should display app title as `Angular REST App`', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect<any>(page.getAppTitle()).toEqual('Angular REST App');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });

@@ -5,7 +5,7 @@ export class AngularRestAppPage {
     return browser.get('/');
   }
 
-  getAppTitle() {
-    return element(by.css('app-root md-toolbar-row > span')).getText();
+  getParagraphText() {
+    return element(by.css('app-root h1')).getText();
   }
 }

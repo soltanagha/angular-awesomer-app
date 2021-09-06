@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { WidgetsService, Widget } from '../shared';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {WidgetsService} from '../shared/widgets.service';
+import {Widget} from '../shared';
 
 @Component({
   selector: 'app-widgets',
@@ -8,62 +8,26 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./widgets.component.css']
 })
 export class WidgetsComponent implements OnInit {
+  selectedWidget: Widget;
   widgets: Widget[];
-  currentWidget: Widget;
-
-  constructor(private widgetsService: WidgetsService) { }
+  constructor(private widgetsService: WidgetsService) {}
 
   ngOnInit() {
-    this.getWidgets();
-    this.resetCurrentWidget();
+    this.widgets = this.widgetsService.widgets;
+    this.reset();
+  }
+  selected(widget) {
+    this.selectedWidget = widget;
   }
 
-  resetCurrentWidget() {
-    this.currentWidget = { id: null, name: '', description: '' };
+  reset() {
+    this.selectedWidget = { id: null, name: '', description: ''};
   }
-
-  selectWidget(widget) {
-    this.currentWidget = widget;
+  save(widget) {
+    console.log('Saving Widget:', widget);
+    this.reset();
   }
-
-  cancel(widget) {
-    this.resetCurrentWidget();
-  }
-
-  getWidgets() {
-    this.widgetsService.all()
-      .subscribe(widgets => this.widgets = widgets);
-  }
-
-  saveWidget(widget) {
-    if (!widget.id) {
-      this.createWidget(widget);
-    } else {
-      this.updateWidget(widget);
-    }
-  }
-
-  createWidget(widget) {
-    this.widgetsService.create(widget)
-      .subscribe(response => {
-        this.getWidgets();
-        this.resetCurrentWidget();
-      });
-  }
-
-  updateWidget(widget) {
-    this.widgetsService.update(widget)
-      .subscribe(response => {
-        this.getWidgets();
-        this.resetCurrentWidget();
-      });
-  }
-
-  deleteWidget(widget) {
-    this.widgetsService.delete(widget)
-      .subscribe(response => {
-        this.getWidgets();
-        this.resetCurrentWidget();
-      });
+  cancel() {
+    this.reset();
   }
 }
