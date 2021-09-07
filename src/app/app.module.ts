@@ -18,6 +18,8 @@ import { BurritosComponent } from './burritos/burritos.component';
 import {WidgetsComponent} from './widgets/widgets.component';
 import {WidgetsService} from './shared/widgets.service';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { WidgetsListComponent } from './widgets/widgets-list/widgets-list.component';
+import { WidgetDetailComponent } from './widgets/widget-detail/widget-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ReviewsComponent } from './reviews/reviews.component';
     ItemDetailComponent,
     BurritosComponent,
     WidgetsComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    WidgetsListComponent,
+    WidgetDetailComponent,
   ],
   imports: [
     BrowserAnimationsModule,

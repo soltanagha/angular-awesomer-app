@@ -16,18 +16,25 @@ export class WidgetsComponent implements OnInit {
     this.widgets = this.widgetsService.widgets;
     this.reset();
   }
-  selected(widget) {
+
+  selectWidget(widget) {
     this.selectedWidget = widget;
   }
 
   reset() {
     this.selectedWidget = { id: null, name: '', description: ''};
   }
-  save(widget) {
+
+  deleteWidget(widget) {
+    console.log(this)
+  }
+
+  saveWidget(widget) {
     console.log('Saving Widget:', widget);
     this.reset();
   }
-  cancel() {
+  cancel($event) {
     this.reset();
   }
+
 }
